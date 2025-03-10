@@ -1,0 +1,106 @@
+/* Center everything */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+/* Table container */
+.table-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 900px;
+  margin: auto;
+  overflow-x: auto;
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  table-layout: fixed; /* Ensures even column distribution */
+}
+
+/* Table headers */
+th {
+  background-color: #007bff;
+  color: white;
+  padding: 12px;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Table rows */
+td {
+  border: 1px solid #ddd;
+  padding: 0; /* Remove padding to allow full-width input */
+  text-align: center;
+  min-width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Section headers */
+th[colspan="3"] {
+  background-color: #004a99;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Custom styling for table header (top-left) */
+.table-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px;
+}
+
+.left-header {
+  text-align: left;
+}
+
+/* Dropdown styling */
+select {
+  margin-left: 10px;
+  padding: 5px;
+  font-size: 14px;
+}
+
+/* Input fields (centered numbers, full width) */
+input[type="number"] {
+  width: 100%; /* Take full width of the table cell */
+  height: 100%;
+  border: none; /* Remove default box border */
+  padding: 10px;
+  text-align: center;
+  font-size: 16px;
+  outline: none;
+  background-color: transparent; /* Blends with the table */
+  appearance: textfield;
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+/* Remove number input arrows */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"]::-moz-number-spin-box {
+  -moz-appearance: none;
+  margin: 0;
+}
+
+/* Remove focus background and underline */
+input[type="number"]:focus {
+  background-color: transparent !important; /* Remove yellow background */
+  border: none !important; /* Remove border effect */
+}
