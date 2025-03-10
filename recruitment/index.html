@@ -1,35 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Recruitment Pipeline</title>
-  <link rel="stylesheet" href="styles.css" />
+  <title>Agency Performance Table</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <h1>Recruitment Pipeline</h1>
-
-  <div class="controls">
-    <button id="addRowBtn">Add Row</button>
-    <button id="addColumnBtn">Add Column</button>
-  </div>
-
   <div class="table-container">
-    <table id="recruitmentTable">
+    <table id="performanceTable">
       <thead>
-        <tr id="headerRow">
-          <th>Name</th>
-          <th>Stage</th>
-          <th>Owner</th>
+        <tr>
+          <th colspan="3">
+            <div class="table-header">
+              <div class="left-header">
+                <label><strong>Team Name:</strong></label>
+                <select>
+                  <option>Agency 1</option>
+                  <option>Agency 2</option>
+                  <option>Agency 3</option>
+                  <option>Agency 4</option>
+                </select>
+              </div>
+            </div>
+          </th>
+        </tr>
+        <tr>
+          <th>Agency Name</th>
+          <th>Target</th>
+          <th>Actual</th>
         </tr>
       </thead>
       <tbody>
-        <!-- Rows will be dynamically added here -->
+        <tr>
+          <td>ANP</td>
+          <td><input type="number" min="0"></td>
+          <td><input type="number" min="0"></td>
+        </tr>
+        <tr>
+          <td>Active AP</td>
+          <td><input type="number" min="0"></td>
+          <td><input type="number" min="0"></td>
+        </tr>
+        <tr>
+          <td>Cases</td>
+          <td><input type="number" min="0"></td>
+          <td><input type="number" min="0"></td>
+        </tr>
+        <tr>
+          <td>Coded QR</td>
+          <td><input type="number" min="0"></td>
+          <td><input type="number" min="0"></td>
+        </tr>
+        <tr>
+          <th colspan="3">RECRUITMENT</th>
+        </tr>
+        <tr>
+          <td>Agency Partner Prospects</td>
+          <td><input type="number" min="0"></td>
+          <td><input type="number" min="0"></td>
+        </tr>
+        <tr>
+          <td>No. of AP for Review</td>
+          <td><input type="number" min="0"></td>
+          <td><input type="number" min="0"></td>
+        </tr>
+        <tr>
+          <td>No. of Exam Attendees</td>
+          <td><input type="number" min="0"></td>
+          <td><input type="number" min="0"></td>
+        </tr>
+        <tr>
+          <td>No. of AP Interviews (by AL)</td>
+          <td><input type="number" min="0"></td>
+          <td><input type="number" min="0"></td>
+        </tr>
+        <tr>
+          <th colspan="3">ACTIVATION</th>
+        </tr>
+        <tr>
+          <td>Submitting Intermediaries</td>
+          <td><input type="number" min="0"></td>
+          <td><input type="number" min="0"></td>
+        </tr>
+        <tr>
+          <td>New Applications Submitted</td>
+          <td><input type="number" min="0"></td>
+          <td><input type="number" min="0"></td>
+        </tr>
+        <tr>
+          <td>No. of APs with JFW</td>
+          <td><input type="number" min="0"></td>
+          <td><input type="number" min="0"></td>
+        </tr>
+        <tr>
+          <td>No. of VUL Applications</td>
+          <td><input type="number" min="0"></td>
+          <td><input type="number" min="0"></td>
+        </tr>
+        <tr>
+          <td>No. of Trad Applications</td>
+          <td><input type="number" min="0"></td>
+          <td><input type="number" min="0"></td>
+        </tr>
       </tbody>
     </table>
   </div>
 
-  <script src="script.js"></script>
 </body>
 </html>
