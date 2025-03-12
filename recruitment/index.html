@@ -9,104 +9,39 @@
 <body>
 
   <div class="table-container">
+    <!-- Dropdown to switch between agencies -->
+    <div class="table-header">
+      <label><strong>Team Name:</strong></label>
+      <select id="agencySelector">
+        <option value="Agency 1">Agency 1</option>
+        <option value="Agency 2">Agency 2</option>
+        <option value="Agency 3">Agency 3</option>
+        <option value="Agency 4">Agency 4</option>
+      </select>
+    </div>
+
+    <!-- Table -->
     <table id="performanceTable">
       <thead>
-        <tr>
-          <th colspan="3">
-            <div class="table-header">
-              <div class="left-header">
-                <label><strong>Team Name:</strong></label>
-                <select>
-                  <option>Agency 1</option>
-                  <option>Agency 2</option>
-                  <option>Agency 3</option>
-                  <option>Agency 4</option>
-                </select>
-              </div>
-            </div>
-          </th>
-        </tr>
         <tr>
           <th>Agency Name</th>
           <th>Target</th>
           <th>Actual</th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <td>ANP</td>
-          <td><input type="number" min="0"></td>
-          <td><input type="number" min="0"></td>
-        </tr>
-        <tr>
-          <td>Active AP</td>
-          <td><input type="number" min="0"></td>
-          <td><input type="number" min="0"></td>
-        </tr>
-        <tr>
-          <td>Cases</td>
-          <td><input type="number" min="0"></td>
-          <td><input type="number" min="0"></td>
-        </tr>
-        <tr>
-          <td>Coded QR</td>
-          <td><input type="number" min="0"></td>
-          <td><input type="number" min="0"></td>
-        </tr>
-        <tr>
-          <th colspan="3">RECRUITMENT</th>
-        </tr>
-        <tr>
-          <td>Agency Partner Prospects</td>
-          <td><input type="number" min="0"></td>
-          <td><input type="number" min="0"></td>
-        </tr>
-        <tr>
-          <td>No. of AP for Review</td>
-          <td><input type="number" min="0"></td>
-          <td><input type="number" min="0"></td>
-        </tr>
-        <tr>
-          <td>No. of Exam Attendees</td>
-          <td><input type="number" min="0"></td>
-          <td><input type="number" min="0"></td>
-        </tr>
-        <tr>
-          <td>No. of AP Interviews (by AL)</td>
-          <td><input type="number" min="0"></td>
-          <td><input type="number" min="0"></td>
-        </tr>
-        <tr>
-          <th colspan="3">ACTIVATION</th>
-        </tr>
-        <tr>
-          <td>Submitting Intermediaries</td>
-          <td><input type="number" min="0"></td>
-          <td><input type="number" min="0"></td>
-        </tr>
-        <tr>
-          <td>New Applications Submitted</td>
-          <td><input type="number" min="0"></td>
-          <td><input type="number" min="0"></td>
-        </tr>
-        <tr>
-          <td>No. of APs with JFW</td>
-          <td><input type="number" min="0"></td>
-          <td><input type="number" min="0"></td>
-        </tr>
-        <tr>
-          <td>No. of VUL Applications</td>
-          <td><input type="number" min="0"></td>
-          <td><input type="number" min="0"></td>
-        </tr>
-        <tr>
-          <td>No. of Trad Applications</td>
-          <td><input type="number" min="0"></td>
-          <td><input type="number" min="0"></td>
-        </tr>
+      <tbody id="tableBody">
+        <!-- Rows will be generated dynamically -->
       </tbody>
     </table>
   </div>
 
+  <!-- Submit Button to Generate PDF -->
+  <button id="generatePDF">Submit & Download PDF</button>
+
+  <!-- Include jsPDF and autoTable -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
+
+  <script src="script.js"></script>
 </body>
 </html>
