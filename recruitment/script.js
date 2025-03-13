@@ -1,15 +1,17 @@
 // Get elements
 const tableBody = document.getElementById("tableBody");
 const agencySelector = document.getElementById("agencySelector");
+const weekSelector = document.getElementById("weekSelector");
 const generatePDFButton = document.getElementById("generatePDF");
 
 // Ensure jsPDF is available
 const jsPDF = window.jspdf.jsPDF;
 
-// Default agency names
+// Default agencies and weeks
 const agencies = ["Agency 1", "Agency 2", "Agency 3", "Agency 4"];
+const weeks = ["Week 1", "Week 2", "Week 3", "Week 4"];
 
-// Default data structure for all agencies
+// Default data structure
 const defaultData = [
   { name: "ANP", target: "", actual: "" },
   { name: "Active AP", target: "", actual: "" },
@@ -30,53 +32,38 @@ const defaultData = [
   { name: "No. of Trad Applications", target: "", actual: "" }
 ];
 
-// Function to ensure every agency is initialized in localStorage
-function initializeAgencies() {
+// **Ensure Local Storage is Initialized**
+function initializeData() {
+  let storedData = JSON.parse(localStorage.getItem("agencyData")) || {};
+
   agencies.forEach(agency => {
-    if (!localStorage.getItem(agency)) {
-      localStorage.setItem(agency, JSON.stringify(defaultData));
-    } else {
-      // Ensure all data is properly structured (fix missing fields)
-      let agencyData = JSON.parse(localStorage.getItem(agency));
-      if (agencyData.length !== defaultData.length) {
-        localStorage.setItem(agency, JSON.stringify(defaultData));
-      }
+    if (!storedData[agency]) {
+      storedData[agency] = {};
     }
+    
+    weeks.forEach(week => {
+      if (!storedData[agency][week]) {
+        storedData[agency][week] = JSON.parse(JSON.stringify(defaultData));
+      }
+    });
   });
+
+  localStorage.setItem("agencyData", JSON.stringify(storedData));
 }
 
-// Populate dropdown dynamically
-function populateDropdown() {
-  agencySelector.innerHTML = ""; // Clear existing options
-  agencies.forEach(agency => {
-    const option = document.createElement("option");
-    option.value = agency;
-    option.textContent = agency;
-    agencySelector.appendChild(option);
-  });
-}
+// **Load Table for Selected Agency & Week**
+function loadTable() {
+  const agency = agencySelector.value;
+  const week = weekSelector.value;
 
-// Load table for selected agency
-function loadTable(agency) {
-  tableBody.innerHTML = ""; // Clear the existing table
+  tableBody.innerHTML = ""; // Clear table
+  initializeData(); // Ensure data exists
 
-  // Ensure agency data exists in Local Storage
-  initializeAgencies();
+  let storedData = JSON.parse(localStorage.getItem("agencyData"));
 
-  let agencyData = JSON.parse(localStorage.getItem(agency));
+  let selectedData = storedData[agency][week] || JSON.parse(JSON.stringify(defaultData));
 
-  // Ensure no undefined values remain (keep blank fields as empty strings)
-  agencyData = agencyData.map(row => ({
-    name: row.name || "",
-    target: row.target || "",
-    actual: row.actual || "",
-    header: row.header || null
-  }));
-
-  // Set the first column header to the agency name
-  document.querySelector("#performanceTable thead tr th").textContent = agency;
-
-  agencyData.forEach((row, index) => {
+  selectedData.forEach((row, index) => {
     const tr = document.createElement("tr");
 
     if (row.header) {
@@ -93,7 +80,7 @@ function loadTable(agency) {
       const targetTd = document.createElement("td");
       const targetInput = document.createElement("input");
       targetInput.type = "number";
-      targetInput.value = row.target || ""; // Keep blank instead of "0"
+      targetInput.value = row.target || "";
       targetInput.dataset.index = index;
       targetInput.dataset.type = "target";
       targetInput.addEventListener("input", saveData);
@@ -103,7 +90,7 @@ function loadTable(agency) {
       const actualTd = document.createElement("td");
       const actualInput = document.createElement("input");
       actualInput.type = "number";
-      actualInput.value = row.actual || ""; // Keep blank instead of "0"
+      actualInput.value = row.actual || "";
       actualInput.dataset.index = index;
       actualInput.dataset.type = "actual";
       actualInput.addEventListener("input", saveData);
@@ -113,57 +100,85 @@ function loadTable(agency) {
 
     tableBody.appendChild(tr);
   });
-
-  // Save cleaned data back to Local Storage to prevent future blank spaces
-  localStorage.setItem(agency, JSON.stringify(agencyData));
-
-  // Update the dropdown to match the selected agency
-  agencySelector.value = agency;
 }
 
-// Save data when input changes
+// **Save Data Correctly**
 function saveData(event) {
   const agency = agencySelector.value;
-  let agencyData = JSON.parse(localStorage.getItem(agency)) || defaultData;
+  const week = weekSelector.value;
+
+  let storedData = JSON.parse(localStorage.getItem("agencyData")) || {};
+
+  // Ensure agency and week data exists
+  if (!storedData[agency]) storedData[agency] = {};
+  if (!storedData[agency][week]) storedData[agency][week] = JSON.parse(JSON.stringify(defaultData));
 
   const index = event.target.dataset.index;
   const type = event.target.dataset.type;
 
-  agencyData[index][type] = event.target.value || ""; // Store blank instead of "0"
-  localStorage.setItem(agency, JSON.stringify(agencyData));
+  // Update stored data
+  storedData[agency][week][index][type] = event.target.value || "";
+
+  // Save updated data back to Local Storage
+  localStorage.setItem("agencyData", JSON.stringify(storedData));
 }
 
-// Event listener for agency selection
-agencySelector.addEventListener("change", () => {
-  loadTable(agencySelector.value);
-});
+// **Event Listeners**
+agencySelector.addEventListener("change", loadTable);
+weekSelector.addEventListener("change", loadTable);
 
-// Initialize the dropdown and table
-initializeAgencies();
-populateDropdown();
-loadTable(agencySelector.value);
+// **Initialize Data & Load First Table**
+initializeData();
+loadTable();
 
-// Generate PDF
 generatePDFButton.addEventListener("click", () => {
   const doc = new jsPDF();
+  const selectedWeek = weekSelector.value;
+  let storedData = JSON.parse(localStorage.getItem("agencyData")) || {};
 
-  agencies.forEach((agency) => {
-    let agencyData = JSON.parse(localStorage.getItem(agency)) || defaultData;
+  let yPos = 10; // Start position for the first entry
+  let pageHeight = doc.internal.pageSize.height; // Get PDF page height
+  let padding = 15; // Space after each table
 
-    // Ensure agency name is at the top of the table
-    doc.setFontSize(14);
-    doc.text(`Team Name: ${agency}`, 10, doc.autoTable.previous ? doc.autoTable.previous.finalY + 15 : 10);
-    
-    doc.autoTable({
-      head: [["Category", "Target", "Actual"]],
-      body: agencyData.map(row => 
-        row.header 
-        ? [{ content: row.header, colSpan: 3, styles: { fontStyle: "bold" } }] 
-        : [row.name, row.target || "", row.actual || ""]
-      ),
-      startY: doc.autoTable.previous ? doc.autoTable.previous.finalY + 20 : 20
-    });
+  agencies.forEach((agency, index) => {
+      if (!storedData[agency] || !storedData[agency][selectedWeek]) return;
+
+      let selectedWeekData = storedData[agency][selectedWeek];
+
+      // Ensure we don't start a new page unless necessary
+      let willFit = yPos + (selectedWeekData.length * 8) + padding <= pageHeight;
+
+      if (!willFit) {
+          doc.addPage();
+          yPos = 10;
+      }
+
+      // Add Team Name title
+      doc.setFontSize(14);
+      doc.text(`Team Name: ${agency} - ${selectedWeek}`, 10, yPos);
+      yPos += 8;
+
+      // Generate Table
+      doc.autoTable({
+          head: [["Category", "Target", "Actual"]],
+          body: selectedWeekData.map(row =>
+              row.header
+                  ? [{ content: row.header, colSpan: 3, styles: { fontStyle: "bold" } }]
+                  : [row.name, row.target || "", row.actual || ""]
+          ),
+          startY: yPos,
+          theme: "striped",
+          styles: { fontSize: 10 },
+          headStyles: { fillColor: [41, 128, 185] },
+          margin: { left: 10, right: 10 },
+          didDrawPage: function (data) {
+              yPos = data.cursor.y + padding; // Move down for next agency
+          },
+      });
+
+      // Ensure correct spacing for the next agency
+      yPos += padding;
   });
 
-  doc.save("Agency_Report.pdf");
+  doc.save(`Agency_Report_${selectedWeek}.pdf`);
 });
