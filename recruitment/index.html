@@ -9,7 +9,7 @@
 <body>
 
   <div class="table-container">
-    <!-- Dropdown to switch between agencies -->
+    <!-- Dropdowns to switch between agencies and weeks -->
     <div class="table-header">
       <label><strong>Team Name:</strong></label>
       <select id="agencySelector">
@@ -18,13 +18,21 @@
         <option value="Agency 3">Agency 3</option>
         <option value="Agency 4">Agency 4</option>
       </select>
+
+      <label><strong>Week:</strong></label>
+      <select id="weekSelector">
+        <option value="Week 1">Week 1</option>
+        <option value="Week 2">Week 2</option>
+        <option value="Week 3">Week 3</option>
+        <option value="Week 4">Week 4</option>
+      </select>
     </div>
 
     <!-- Table -->
     <table id="performanceTable">
       <thead>
         <tr>
-          <th>Agency Name</th>
+          <th>Category</th>
           <th>Target</th>
           <th>Actual</th>
         </tr>
