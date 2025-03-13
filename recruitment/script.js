@@ -22,7 +22,7 @@ const defaultData = [
   { name: "Agency Partner Prospects", target: "", actual: "" },
   { name: "No. of AP for Review", target: "", actual: "" },
   { name: "No. of Exam Attendees", target: "", actual: "" },
-  { name: "No. of AP Interviews (by AL)", target: "", actual: "" },
+  { name: "No. of AP Interviews (AL)", target: "", actual: "" },
 
   { header: "ACTIVATION" },
   { name: "Submitting Intermediaries", target: "", actual: "" },
@@ -32,9 +32,11 @@ const defaultData = [
   { name: "No. of Trad Applications", target: "", actual: "" }
 ];
 
-// **Ensure Local Storage is Initialized**
+// **Ensure Local Storage is Initialized & Syncs with Backend Changes**
 function initializeData() {
   let storedData = JSON.parse(localStorage.getItem("agencyData")) || {};
+
+  let needsUpdate = false; // Flag to check if we should update local storage
 
   agencies.forEach(agency => {
     if (!storedData[agency]) {
@@ -44,12 +46,25 @@ function initializeData() {
     weeks.forEach(week => {
       if (!storedData[agency][week]) {
         storedData[agency][week] = JSON.parse(JSON.stringify(defaultData));
+        needsUpdate = true;
+      } else {
+        // **Check if names in stored data match defaultData**
+        storedData[agency][week].forEach((row, index) => {
+          if (row.name !== defaultData[index].name) {
+            storedData[agency][week][index].name = defaultData[index].name;
+            needsUpdate = true; // Flag an update
+          }
+        });
       }
     });
   });
 
-  localStorage.setItem("agencyData", JSON.stringify(storedData));
+  // **Only update Local Storage if names were changed**
+  if (needsUpdate) {
+    localStorage.setItem("agencyData", JSON.stringify(storedData));
+  }
 }
+
 
 // **Load Table for Selected Agency & Week**
 function loadTable() {
