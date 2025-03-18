@@ -43,17 +43,15 @@
     </table>
   </div>
 
-  <!-- Submit Button to Generate PDF -->
-  <button id="generatePDF">Submit & Download PDF</button>
+  <!-- Submit Button to Generate Excel -->
+  <button id="generateExcel">Submit</button>
 
-  <!-- Include jsPDF and autoTable -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
+  <!-- Include SheetJS for Excel generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
-  <script src="script.js"></script>
+  <!-- Separate scripts for better organization -->
+  <script src="tableHandler.js"></script>
+  <script src="excelExport.js"></script>
+
 </body>
 </html>
-
-<!--RBM and CAO = Full Access wit with respositoxry
-
-MP = View and Download ONLY -->
