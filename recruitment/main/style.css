@@ -1,0 +1,120 @@
+/* Reset + Base */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #FFFDFE;
+  color: #333;
+}
+
+/* Title */
+h2 {
+  text-align: center;
+  color: #395998;
+  margin-bottom: 30px;
+}
+
+.table-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin: 20px auto;
+  padding: 10px 20px;
+  max-width: 1000px;
+  background-color: #FFFDFE;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+.table-header label {
+  font-weight: bold;
+  color: #395998;
+}
+
+.table-header select {
+  padding: 6px 12px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  table-layout: fixed;
+}
+
+/* Table headers */
+th {
+  background-color: #395998;
+  color: white;
+  padding: 12px;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Table rows */
+td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+  min-width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+}
+
+/* Section Headers */
+.section-header {
+  background-color: #FBD045;
+  color: #395998;
+  text-align: center;
+  font-weight: bold;
+  padding: 12px;
+  font-size: 15px;
+}
+
+/* Dropdown styling */
+select {
+  margin-left: 10px;
+  padding: 6px 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Input fields */
+input[type="number"] {
+  width: 100%;
+  padding: 8px;
+  text-align: center;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #FFFDFE;
+  box-sizing: border-box;
+}
+
+/* Button Styling */
+button {
+  display: block;
+  margin: 25px auto;
+  padding: 12px 24px;
+  background-color: #E1942D;
+  color: white;
+  border: none;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #F4B43C;
+}
