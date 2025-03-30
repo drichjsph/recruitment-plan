@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submission History (Monthly Log)</title>
+    <link rel="stylesheet" href="history.css">
+</head>
+<body>
+    <h2 style="text-align:center">Submission History (Monthly Log)</h2>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Agency</th>
+                    <th>Submitted At</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody id="historyTable">
+                <!-- Filled dynamically -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
+    <script src="pdfExport.js"></script>
+    <script src="historyViewer.js"></script>
+</body>
+</html>

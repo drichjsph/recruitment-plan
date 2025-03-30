@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agency Performance Table</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="table-container">
+    <!-- Dropdowns to switch between agencies and weeks -->
+    <div class="table-header">
+      <label><strong>Team Name:</strong></label>
+      <select id="agencySelector">
+        <option value="Agency 1">Agency 1</option>
+        <option value="Agency 2">Agency 2</option>
+        <option value="Agency 3">Agency 3</option>
+        <option value="Agency 4">Agency 4</option>
+      </select>
+
+      <label><strong>Week:</strong></label>
+      <select id="weekSelector">
+        <option value="Week 1">Week 1</option>
+        <option value="Week 2">Week 2</option>
+        <option value="Week 3">Week 3</option>
+        <option value="Week 4">Week 4</option>
+      </select>
+    </div>
+
+    <!-- Table -->
+    <table id="performanceTable">
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Target</th>
+          <th>Actual</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody">
+        <!-- Rows will be generated dynamically -->
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Submit Button to Generate Excel -->
+  <button id="generateExcel">Submit</button>
+
+  <!-- Include SheetJS for Excel generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+  <!-- Separate scripts for better organization -->
+  <script src="tableHandler.js"></script>
+  <script src="submitHandler.js"></script>
+
+</body>
+</html>
